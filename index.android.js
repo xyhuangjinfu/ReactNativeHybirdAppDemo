@@ -15,6 +15,7 @@ class HelloWorld extends React.Component {
         <Text style={styles.hello}>Hello, World, what happend!</Text>
         <Text style={styles.hello}>Hello, World, dadada!</Text>
         <Text style={styles.hello}>Hello, World, qqqqq!</Text>
+        <Text style={styles.hello}>Hello, World, {this.props.key_data}</Text>
       </View>
     )
   }
