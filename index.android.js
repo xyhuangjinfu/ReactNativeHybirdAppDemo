@@ -91,8 +91,8 @@ class HelloWorld extends React.Component {
   getComponent00(navigator) {
     return (
       <MyComponent00
-        jumpTo01={() => navigator.push({ name: 'component 01', key: 1 })}
-        jumpTo02={() => navigator.push({ name: 'component 02', key: 2 })}
+        jumpTo01={() => { navigator.push(this.state.routes[1]); } }
+        jumpTo02={() => { navigator.push(this.state.routes[2]); } }
         />
     );
   }
@@ -115,17 +115,6 @@ class HelloWorld extends React.Component {
     );
   }
 
-
-  // render() {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={styles.hello}>Hello, World, what happend!</Text>
-  //       <Text style={styles.hello}>Hello, World, dadada!</Text>
-  //       <Text style={styles.hello}>Hello, World, qqqqq!</Text>
-  //       <Text style={styles.hello}>Hello, World, {this.props.key_data}</Text>
-  //     </View>
-  //   )
-  // }
 }
 var styles = StyleSheet.create({
   container: {
