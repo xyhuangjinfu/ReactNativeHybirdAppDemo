@@ -7,12 +7,17 @@ import {
   Text,
   View,
   Navigator,
-  ToastAndroid
+  ToastAndroid,
+  BackAndroid,
+  BackPressEventName
 } from 'react-native';
 
 import MyComponent00 from './rn/MyComponent00';
 import MyComponent01 from './rn/MyComponent01';
 import MyComponent02 from './rn/MyComponent02';
+
+
+var _navigator;
 
 class HelloWorld extends React.Component {
 
@@ -22,24 +27,57 @@ class HelloWorld extends React.Component {
     this.getComponent00 = this.getComponent00.bind(this);
     this.getComponent01 = this.getComponent01.bind(this);
     this.getComponent02 = this.getComponent02.bind(this);
+    this.onBackPress = this.onBackPress.bind(this);
+
+    this.state = {
+      "routes": [
+        {
+          "name": "component00",
+          "key": 0
+        },
+        {
+          "name": "component01",
+          "key": 1
+        },
+        {
+          "name": "component02",
+          "key": 2
+        }
+      ]
+    };
+  }
+
+  componentWillMount() {
+    BackAndroid.addEventListener(BackPressEventName, this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener(BackPressEventName, this.onBackPress);
+  }
+
+  onBackPress() {
+    if (_navigator == null) {
+      return false;
+    }
+    if (_navigator.getCurrentRoutes().length === 1) {
+      return false;
+    }
+    _navigator.pop();
+    return true;
   }
 
   render() {
-    const routes = [
-      { name: 'component 00', key: 0 },
-      { name: 'component 01', key: 1 },
-      { name: 'component 02', key: 2 }
-    ];
     return (
       <Navigator
-        initialRoute={routes[0]}
-        initialRouteStack={routes}
+        initialRoute={this.state.routes[0]}
+        initialRouteStack={this.state.routes}
         renderScene={this.renderByType}
         />
     );
   }
 
   renderByType(route, navigator) {
+    _navigator = navigator;
     if (route.key == 0) {
       return this.getComponent00(navigator);
     } else if (route.key == 1) {
