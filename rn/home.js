@@ -44,23 +44,33 @@ class Home extends React.Component {
             <View style={{height: 50, flexDirection:'row'}}>
                 <Text style={{flex:1, backgroundColor: '#00ff00', justifyContent:'center'}} onPress={this.jumpToLocation}>定位</Text>
                 <View style={{flex:3, flexDirection:'row'}}>
-                    <TextInput style={{flex:3}} placeholder="请输入搜索内容" onChangeText={(text)=>searchContent=text}>{this.state.advertisements.length}</TextInput>
+                    <TextInput style={{flex:3}} placeholder="请输入搜索内容" onChangeText={(text)=>searchContent=text}></TextInput>
                     <Text style={{flex:1, backgroundColor: '#ff0000'}} onPress={this.jumpToSearch}>搜索</Text>
                 </View>
                 <Text style={{flex:1, alignItems:'flex-end', backgroundColor: '#00ff00'}} onPress={this.jumpToScan}>扫一扫</Text>
             </View>
 
-            <Text >{typeof this.state.advertisements[0].adPathPic}</Text>
-
 			{/* 广告栏  */}
-            <ScrollView>
-                for(var o in this.state.advertisements) {
-                    
-                }  
-            </ScrollView>
+            <ScrollView style={{height: 200}} horizontal={true}>{this.getAdvertisementView()}</ScrollView>
 
             </ScrollView>
             );
+    }
+
+    getAdvertisementView() {
+        let adViews = [];
+        let i;
+        for(i=0; i<this.state.advertisements.length; i++) {
+            let ad = this.state.advertisements[i];
+            if (typeof ad !== 'undefined') {
+                adViews.push(<Image key={i} style={{height: 300, width:300}} source={{uri:ad.adPathPic}} onPress={this.jumpToAdvertisementDetail}></Image>);
+            }        
+        } 
+        return adViews;
+    }
+
+    jumpToAdvertisementDetail() {
+        ToastAndroid.show("广告详情", ToastAndroid.SHORT);
     }
 
 
