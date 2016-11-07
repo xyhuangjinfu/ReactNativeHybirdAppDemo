@@ -20,6 +20,5 @@
         android:id="@+id/rn_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title"
-        android:background="#00ff00"/>
+        android:layout_below="@+id/title"/>
 </RelativeLayout>

@@ -6,12 +6,48 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  TextInput,
+  ToastAndroid
 } from 'react-native';
 
+
+let searchContent;
+
 class Home extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.jumpToLocation = this.jumpToLocation.bind(this);
+        this.jumpToScan = this.jumpToScan.bind(this);
+        this.jumpToSearch = this.jumpToSearch.bind(this);
+    }
+    
+
     render() {
-        return (<Text>Hello World!</Text>)
+        return (
+            <View style={{height: 50, flexDirection:'row'}}>
+                <Text style={{flex:1, backgroundColor: '#00ff00', justifyContent:'center'}} onPress={this.jumpToLocation}>定位</Text>
+                <View style={{flex:3, flexDirection:'row'}}>
+                    <TextInput style={{flex:3}} placeholder="请输入搜索内容" onChangeText={(text)=>searchContent=text}></TextInput>
+                    <Text style={{flex:1, backgroundColor: '#ff0000'}} onPress={this.jumpToSearch}>搜索</Text>
+                </View>
+                <Text style={{flex:1, alignItems:'flex-end', backgroundColor: '#00ff00'}} onPress={this.jumpToScan}>扫一扫</Text>
+            </View>
+            );
+    }
+
+
+    jumpToLocation() {
+        ToastAndroid.show("定位", ToastAndroid.SHORT);
+    }
+
+    jumpToScan() {
+        ToastAndroid.show("扫码", ToastAndroid.SHORT);
+    }
+
+    jumpToSearch() {
+        ToastAndroid.show("搜索: " + searchContent, ToastAndroid.SHORT);
     }
 }
 

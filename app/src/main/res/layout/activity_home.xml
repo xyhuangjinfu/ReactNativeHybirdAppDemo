@@ -11,8 +11,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom"
-        android:background="#e6a1ed"/>
+        android:layout_above="@+id/bottom"/>
 
     <LinearLayout
         android:id="@+id/bottom"
