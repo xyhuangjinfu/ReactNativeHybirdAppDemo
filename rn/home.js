@@ -24,6 +24,9 @@ class Home extends React.Component {
         this.jumpToScan = this.jumpToScan.bind(this);
         this.jumpToSearch = this.jumpToSearch.bind(this);
         this.scan = this.scan.bind(this);
+        this.loadAdvertisement = this.loadAdvertisement.bind(this);
+
+        this.loadAdvertisement();
     }
     
 
@@ -59,6 +62,16 @@ class Home extends React.Component {
     jumpToSearch() {
         ToastAndroid.show("搜索: " + searchContent, ToastAndroid.SHORT);
         StartActivityModule.startActivity("cn.hjf.rntest.SearchActivity", {search_content:searchContent});
+    }
+
+    loadAdvertisement() {
+        let url = "http://api.361health.net/HealthManagerAPI/appAd/queryList";
+        let method = { method: 'POST', 
+                        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'devicetype':'android', 'version':'2.0.0'},
+                        body:JSON.stringify({currentStatus:1, adLocation:1})};
+        fetch(url, method)
+            .then((response)=>response.json())
+            .then((responseJson)=>ToastAndroid.show(JSON.stringify(responseJson), ToastAndroid.SHORT));
     }
     
 }
