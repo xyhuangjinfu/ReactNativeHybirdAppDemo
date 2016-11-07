@@ -11,6 +11,7 @@ import {
   ToastAndroid
 } from 'react-native';
 
+import ImagePickerModule from './MyNativeModules'; 
 
 let searchContent;
 
@@ -21,6 +22,7 @@ class Home extends React.Component {
         this.jumpToLocation = this.jumpToLocation.bind(this);
         this.jumpToScan = this.jumpToScan.bind(this);
         this.jumpToSearch = this.jumpToSearch.bind(this);
+        this.scan = this.scan.bind(this);
     }
     
 
@@ -42,13 +44,21 @@ class Home extends React.Component {
         ToastAndroid.show("定位", ToastAndroid.SHORT);
     }
 
-    jumpToScan() {
+    async jumpToScan() {
         ToastAndroid.show("扫码", ToastAndroid.SHORT);
+        this.scan().then(
+            (imgPath)=>ToastAndroid.show("路径: " + imgPath, ToastAndroid.SHORT), 
+            (error)=>ToastAndroid.show("错误", ToastAndroid.SHORT));
+    }
+
+    async scan () {
+        return await ImagePickerModule.pickImage();
     }
 
     jumpToSearch() {
         ToastAndroid.show("搜索: " + searchContent, ToastAndroid.SHORT);
     }
+    
 }
 
 

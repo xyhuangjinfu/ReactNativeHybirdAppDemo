@@ -8,10 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
-import com.facebook.react.common.LifecycleState;
-import com.facebook.react.shell.MainReactPackage;
 
 /**
  * Created by huangjinfu on 2016/11/7.
@@ -21,7 +18,6 @@ public class HomeFragment extends Fragment {
 
     FrameLayout rnContainer;
     private ReactRootView mReactRootView;
-    private ReactInstanceManager mReactInstanceManager;
 
     @Nullable
     @Override
@@ -33,16 +29,8 @@ public class HomeFragment extends Fragment {
 
 
         mReactRootView = new ReactRootView(getActivity());
-        mReactInstanceManager = ReactInstanceManager.builder()
-                .setApplication(getActivity().getApplication())
-                .setBundleAssetName("index.android.bundle")
-                .setJSMainModuleName("index.android")
-                .addPackage(new MainReactPackage())
-                .setUseDeveloperSupport(BuildConfig.DEBUG)
-                .setInitialLifecycleState(LifecycleState.RESUMED)
-                //.setUseOldBridge(true) // uncomment this line if your app crashes
-                .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "Home", null);
+
+        mReactRootView.startReactApplication(ReactInstanceManagerHolder.getReactInstanceManager(), "Home", null);
 
         rnContainer.addView(mReactRootView);
 
