@@ -23,7 +23,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {'advertisements':[{'adPathPic':'sss'}]};
+        this.state = {'advertisements':[]};
 
         this.jumpToLocation = this.jumpToLocation.bind(this);
         this.jumpToScan = this.jumpToScan.bind(this);
@@ -31,6 +31,7 @@ class Home extends React.Component {
         this.scan = this.scan.bind(this);
         this.loadAdvertisement = this.loadAdvertisement.bind(this);
         this.getAdvertisementUrls = this.getAdvertisementUrls.bind(this);
+        this.getAdvertisementView = this.getAdvertisementView.bind(this);
 
         this.loadAdvertisement();
     }
