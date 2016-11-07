@@ -8,7 +8,9 @@ import {
   View,
   TouchableHighlight,
   TextInput,
-  ToastAndroid
+  ToastAndroid,
+  ScrollView,
+  Image
 } from 'react-native';
 
 import ImagePickerModule from './ImagePickerModule'; 
@@ -20,11 +22,15 @@ class Home extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {'advertisements':[{'adPathPic':'sss'}]};
+
         this.jumpToLocation = this.jumpToLocation.bind(this);
         this.jumpToScan = this.jumpToScan.bind(this);
         this.jumpToSearch = this.jumpToSearch.bind(this);
         this.scan = this.scan.bind(this);
         this.loadAdvertisement = this.loadAdvertisement.bind(this);
+        this.getAdvertisementUrls = this.getAdvertisementUrls.bind(this);
 
         this.loadAdvertisement();
     }
@@ -32,14 +38,28 @@ class Home extends React.Component {
 
     render() {
         return (
+            <ScrollView>
+
+            {/* 顶部标题栏  */}
             <View style={{height: 50, flexDirection:'row'}}>
                 <Text style={{flex:1, backgroundColor: '#00ff00', justifyContent:'center'}} onPress={this.jumpToLocation}>定位</Text>
                 <View style={{flex:3, flexDirection:'row'}}>
-                    <TextInput style={{flex:3}} placeholder="请输入搜索内容" onChangeText={(text)=>searchContent=text}></TextInput>
+                    <TextInput style={{flex:3}} placeholder="请输入搜索内容" onChangeText={(text)=>searchContent=text}>{this.state.advertisements.length}</TextInput>
                     <Text style={{flex:1, backgroundColor: '#ff0000'}} onPress={this.jumpToSearch}>搜索</Text>
                 </View>
                 <Text style={{flex:1, alignItems:'flex-end', backgroundColor: '#00ff00'}} onPress={this.jumpToScan}>扫一扫</Text>
             </View>
+
+            <Text >{typeof this.state.advertisements[0].adPathPic}</Text>
+
+			{/* 广告栏  */}
+            <ScrollView>
+                for(var o in this.state.advertisements) {
+                    
+                }  
+            </ScrollView>
+
+            </ScrollView>
             );
     }
 
@@ -71,7 +91,12 @@ class Home extends React.Component {
                         body:JSON.stringify({currentStatus:1, adLocation:1})};
         fetch(url, method)
             .then((response)=>response.json())
-            .then((responseJson)=>ToastAndroid.show(JSON.stringify(responseJson), ToastAndroid.SHORT));
+            .then(this.getAdvertisementUrls);
+    }
+
+    getAdvertisementUrls(responseJson) {
+        ToastAndroid.show(JSON.stringify(responseJson), ToastAndroid.SHORT)
+        this.setState({'advertisements':responseJson.data});
     }
     
 }
