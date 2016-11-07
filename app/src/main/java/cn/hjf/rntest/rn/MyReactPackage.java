@@ -1,4 +1,4 @@
-package cn.hjf.rntest.rnmodule;
+package cn.hjf.rntest.rn;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by huangjinfu on 2016/11/7.
  */
 
-public class AnExampleReactPackage implements ReactPackage {
+public class MyReactPackage implements ReactPackage {
     @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
@@ -29,6 +29,7 @@ public class AnExampleReactPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new ImagePickerModule(reactContext));
+        modules.add(new StartActivityModule(reactContext));
         return modules;
     }
 }

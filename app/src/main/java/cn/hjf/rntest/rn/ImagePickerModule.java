@@ -1,4 +1,4 @@
-package cn.hjf.rntest.rnmodule;
+package cn.hjf.rntest.rn;
 
 import android.app.Activity;
 import android.content.Intent;

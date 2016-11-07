@@ -11,7 +11,8 @@ import {
   ToastAndroid
 } from 'react-native';
 
-import ImagePickerModule from './MyNativeModules'; 
+import ImagePickerModule from './ImagePickerModule'; 
+import StartActivityModule from './StartActivityModule'; 
 
 let searchContent;
 
@@ -57,6 +58,7 @@ class Home extends React.Component {
 
     jumpToSearch() {
         ToastAndroid.show("搜索: " + searchContent, ToastAndroid.SHORT);
+        StartActivityModule.startActivity("cn.hjf.rntest.SearchActivity", {search_content:searchContent});
     }
     
 }
