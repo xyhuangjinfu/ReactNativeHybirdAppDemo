@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 //.setUseOldBridge(true) // uncomment this line if your app crashes
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "HelloWorld", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "Home", null);
 
         rnContainer.addView(mReactRootView);
 

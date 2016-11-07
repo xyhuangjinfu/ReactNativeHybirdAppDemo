@@ -15,6 +15,7 @@ import {
 import MyComponent00 from './rn/MyComponent00';
 import MyComponent01 from './rn/MyComponent01';
 import MyComponent02 from './rn/MyComponent02';
+import Home from './rn/home';
 
 
 var _navigator;
@@ -129,3 +130,4 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
+AppRegistry.registerComponent('Home', () => Home);
