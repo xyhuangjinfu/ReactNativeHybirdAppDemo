@@ -46,6 +46,8 @@ class HelloWorld extends React.Component {
         }
       ]
     };
+
+    alert(this.props.key_data);
   }
 
   componentWillMount() {
