@@ -64,14 +64,14 @@ class Home extends React.Component {
         for(i=0; i<this.state.advertisements.length; i++) {
             let ad = this.state.advertisements[i];
             if (typeof ad !== 'undefined') {
-                adViews.push(<Image key={i} style={{height: 300, width:300}} source={{uri:ad.adPathPic}} onPress={this.jumpToAdvertisementDetail}></Image>);
+                adViews.push(
+                    <TouchableHighlight  key={i}  onPress={()=>ToastAndroid.show("广告详情:" + ad.adTitle, ToastAndroid.SHORT)}>
+                        <Image style={{height: 300, width:300}} source={{uri:ad.adPathPic}} onPress={this.jumpToAdvertisementDetail}></Image>
+                    </TouchableHighlight>
+                    );
             }        
         } 
         return adViews;
-    }
-
-    jumpToAdvertisementDetail() {
-        ToastAndroid.show("广告详情", ToastAndroid.SHORT);
     }
 
 
@@ -96,7 +96,7 @@ class Home extends React.Component {
     }
 
     loadAdvertisement() {
-        let url = "http://api.361health.net/HealthManagerAPI/appAd/queryList";
+        let url = "http://api.1949hk.com/HealthManagerAPI/appAd/queryList";
         let method = { method: 'POST', 
                         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'devicetype':'android', 'version':'2.0.0'},
                         body:JSON.stringify({currentStatus:1, adLocation:1})};
