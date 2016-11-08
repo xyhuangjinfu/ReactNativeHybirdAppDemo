@@ -30,6 +30,7 @@ public class MyReactPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new ImagePickerModule(reactContext));
         modules.add(new StartActivityModule(reactContext));
+        modules.add(new FinishActivityModule(reactContext));
         return modules;
     }
 }
